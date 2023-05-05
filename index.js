@@ -48,7 +48,7 @@ app.get("/login", (req, res) => {
     scope: scope,
   });
 
-  res.redirect(`https://accounts.spotify.com/authorize?${queryParams}`);
+  res.redirect(`${FRONTEND_URI}/?${queryParams}`);
 });
 app.get("/callback", (req, res) => {
   const code = req.query.code || null;
