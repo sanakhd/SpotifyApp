@@ -3,18 +3,18 @@
  * @param {function} fn an async function
  * @returns {function}
  */
-export const catchErrors = fn => {
-    return function(...args) {
-      return fn(...args).catch((err) => {
-        console.error(err);
-      })
-    }
-  }
+export const catchErrors = (fn) => {
+  return function (...args) {
+    return fn(...args).catch((err) => {
+      console.error(err);
+    });
+  };
+};
 
-              //Since the Spotify API returns the duration of 
-              //each track in milliseconds, we'll use the formatDuration utility 
-              //function to convert that number into a human-readable format.
-  /**
+//Since the Spotify API returns the duration of
+//each track in milliseconds, we'll use the formatDuration utility
+//function to convert that number into a human-readable format.
+/**
  * Format milliseconds to time duration
  * @param {number} ms number of milliseconds
  * @returns {string} formatted duration string

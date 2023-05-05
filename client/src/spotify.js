@@ -5,7 +5,7 @@ const LOCALSTORAGE_KEYS = {
   accessToken: "spotify_access_token",
   refreshToken: "spotify_refresh_token",
   expireTime: "spotify_token_expire_time",
-  timeStamp: "spotify_token_timestamp",
+  timestamp: "spotify_token_timestamp",
 };
 
 // Map to retrieve localStorage values
@@ -30,21 +30,19 @@ export const logout = () => {
 };
 
 /**
- * Checks if the amount of time that has elapsed between the
- * timestamp in localStorage
- * and not is greater than the expiration time of 3600seconds (1 hour)
- * @returns {boolean} whether or not the access token in
- * localStorage has expired
+ * Checks if the amount of time that has elapsed between the timestamp in localStorage
+ * and now is greater than the expiration time of 3600 seconds (1 hour).
+ * @returns {boolean} Whether or not the access token in localStorage has expired
  */
 const hasTokenExpired = () => {
   const { accessToken, timestamp, expireTime } = LOCALSTORAGE_VALUES;
-
   if (!accessToken || !timestamp) {
     return false;
   }
   const millisecondsElapsed = Date.now() - Number(timestamp);
   return millisecondsElapsed / 1000 > Number(expireTime);
 };
+
 /**
  * Use the refresh token in localStorage to hit the /refresh_token endpoint
  * in our Node app, then update values in localStorage with data from response.
@@ -161,7 +159,7 @@ export const getCurrentUserPlaylists = (limit = 20) => {
  * @param {string} time_range - 'short_term' (last 4 weeks) 'medium_term' (last 6 months) or 'long_term' (calculated from several years of data and including all new data as it becomes available). Defaults to 'short_term'
  * @returns {Promise}
  */
-export const getTopArtists = (time_range = 'short_term') => {
+export const getTopArtists = (time_range = "short_term") => {
   return axios.get(`/me/top/artists?time_range=${time_range}`);
 };
 
@@ -171,7 +169,7 @@ export const getTopArtists = (time_range = 'short_term') => {
  * @param {string} time_range - 'short_term' (last 4 weeks) 'medium_term' (last 6 months) or 'long_term' (calculated from several years of data and including all new data as it becomes available). Defaults to 'short_term'
  * @returns {Promise}
  */
-export const getTopTracks = (time_range = 'short_term') => {
+export const getTopTracks = (time_range = "short_term") => {
   return axios.get(`/me/top/tracks?time_range=${time_range}`);
 };
 
@@ -181,9 +179,9 @@ export const getTopTracks = (time_range = 'short_term') => {
  * @param {string} playlist_id - The Spotify ID for the playlist.
  * @returns {Promise}
  */
-export const getPlaylistById = playlist_id => {
+export const getPlaylistById = (playlist_id) => {
   return axios.get(`/playlists/${playlist_id}`);
-}
+};
 
 /**
  * Get Audio Features for Several Tracks
@@ -191,6 +189,6 @@ export const getPlaylistById = playlist_id => {
  * @param {string} ids - A comma-separated list of the Spotify IDs for the tracks
  * @returns {Promise}
  */
-export const getAudioFeaturesForTracks = ids => {
+export const getAudioFeaturesForTracks = (ids) => {
   return axios.get(`/audio-features?ids=${ids}`);
 };
